@@ -1,0 +1,621 @@
+/* ==========================================================================
+   ShopHub Custom Styles
+   Loaded AFTER Bootstrap, so these rules can override Bootstrap defaults.
+   ========================================================================== */
+
+:root {
+    --shophub-primary: #2b3a67;
+    --shophub-accent: #ffb703;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.9;
+        box-shadow: 0 0 0 rgba(255, 183, 3, 0.18);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(255, 183, 3, 0.22);
+    }
+}
+
+@keyframes buttonFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Navbar ---------- */
+.shophub-navbar {
+    background-color: var(--shophub-primary);
+}
+
+/* ---------- Hero Banner ---------- */
+.hero-banner {
+    min-height: 420px;
+    background: linear-gradient(135deg, rgba(43, 58, 103, 0.93), rgba(74, 91, 156, 0.8)),
+                url('../images/hero-banner.jpg') center/cover no-repeat;
+    animation: fadeInUp 0.9s ease both;
+}
+
+/* ---------- Section titles ---------- */
+.section-title {
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 8px;
+    animation: fadeInUp 0.8s ease both;
+}
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--shophub-accent);
+    border-radius: 2px;
+}
+
+/* ---------- Product & Category cards ---------- */
+.product-card, .category-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeInUp 0.8s ease both;
+}
+.product-card:hover, .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.14) !important;
+}
+
+.product-card:nth-child(1), .category-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2), .category-card:nth-child(2) { animation-delay: 0.12s; }
+.product-card:nth-child(3), .category-card:nth-child(3) { animation-delay: 0.18s; }
+.product-card:nth-child(4), .category-card:nth-child(4) { animation-delay: 0.24s; }
+
+.product-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.category-img {
+    height: 120px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.product-detail-img {
+    height: 420px;
+    width: 100%;
+}
+
+.cart-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+/* ---------- Content Panels ---------- */
+.content-panel {
+    background: #ffffff;
+    border-radius: 1.25rem;
+    box-shadow: 0 14px 40px rgba(43, 58, 103, 0.08);
+}
+
+.newsletter-section {
+    background: linear-gradient(135deg, rgba(58, 89, 152, 0.95), rgba(32, 48, 94, 0.9)),
+                url('../images/newsletter.jpg') center/cover no-repeat;
+    box-shadow: 0 14px 36px rgba(43, 58, 103, 0.16);
+}
+
+.feature-card {
+    background: linear-gradient(145deg, #f8fbff, #f2f6ff);
+    border: 1px solid #e4ebff;
+    border-radius: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(43, 58, 103, 0.12);
+}
+
+.promo-banner {
+    background: linear-gradient(135deg, rgba(43, 58, 103, 0.95), rgba(90, 111, 184, 0.85)),
+                url('../images/sale-banner.jpg') center/cover no-repeat;
+    border-radius: 1.25rem;
+    box-shadow: 0 16px 40px rgba(43, 58, 103, 0.2);
+}
+
+/* ---------- Footer ---------- */
+.shophub-footer {
+    background: linear-gradient(135deg, rgba(28, 37, 65, 0.95), rgba(12, 18, 40, 0.97)),
+                url('../images/footer-bg.jpg') center/cover no-repeat;
+}
+.shophub-footer a {
+    color: #cfd8dc;
+    text-decoration: none;
+}
+.shophub-footer a:hover {
+    color: var(--shophub-accent);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+    background-color: var(--shophub-primary);
+    border-color: var(--shophub-primary);
+    animation: buttonFloat 3.4s ease-in-out infinite;
+}
+.btn-primary:hover {
+    background-color: #1c2541;
+    border-color: #1c2541;
+    animation: none;
+}
+.btn-warning {
+    animation: glowPulse 2.8s ease-in-out infinite;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    animation: pageFade 0.8s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+.hero-banner h1{
+    animation: slideLeft 1s ease;
+}
+
+.hero-banner p{
+    animation: slideRight 1.2s ease;
+}
+
+.hero-banner .btn{
+    animation: fadeInUp 1.5s ease;
+}
+
+@keyframes slideLeft{
+    from{
+        opacity:0;
+        transform:translateX(-80px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes slideRight{
+    from{
+        opacity:0;
+        transform:translateX(80px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+} 
+.product-card{
+    overflow:hidden;
+}
+
+.product-img{
+    transition:0.5s;
+}
+
+.product-card:hover .product-img{
+    transform:scale(1.12);
+} 
+
+.btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.btn::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:0;
+    height:0;
+    background:rgba(255,255,255,.25);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    transition:.6s;
+}
+
+.btn:hover::before{
+    width:300px;
+    height:300px;
+}
+
+.product-card{
+    animation:floatCard 5s ease-in-out infinite;
+}
+
+@keyframes floatCard{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.shophub-navbar{
+
+animation:navbarDown .8s ease;
+
+}
+
+@keyframes navbarDown{
+
+from{
+
+transform:translateY(-100%);
+
+}
+
+to{
+
+transform:translateY(0);
+
+}
+
+}
+
+.nav-link{
+
+position:relative;
+
+}
+
+.nav-link::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:0;
+
+width:0;
+
+height:2px;
+
+background:#ffb703;
+
+transition:.4s;
+
+transform:translateX(-50%);
+
+}
+
+.nav-link:hover::after{
+
+width:80%;
+
+}
+.badge{
+
+animation:bounceBadge 2s infinite;
+
+}
+
+@keyframes bounceBadge{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-6px);
+
+}
+
+}
+.cart-icon:hover{
+
+animation:shake .6s;
+
+}
+
+@keyframes shake{
+
+0%{transform:rotate(0);}
+
+25%{transform:rotate(12deg);}
+
+50%{transform:rotate(-12deg);}
+
+75%{transform:rotate(8deg);}
+
+100%{transform:rotate(0);}
+
+}  
+.product-card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.product-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-100%;
+
+width:60%;
+
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.4),
+transparent
+);
+
+transform:skewX(-20deg);
+
+}
+
+.product-card:hover::before{
+
+animation:shine .8s;
+
+}
+
+@keyframes shine{
+
+100%{
+
+left:160%;
+
+}
+
+} 
+
+.btn-gradient{
+
+background:linear-gradient(
+45deg,
+#2b3a67,
+#4a5b9c,
+#ffb703
+);
+
+background-size:300%;
+
+color:white;
+
+animation:gradientMove 5s infinite;
+
+border:none;
+
+}
+
+@keyframes gradientMove{
+
+0%{
+
+background-position:0%;
+
+}
+
+50%{
+
+background-position:100%;
+
+}
+
+100%{
+
+background-position:0%;
+
+}
+
+}
+
+
+.hero-banner{
+    min-height:550px;
+
+    background-image:
+        linear-gradient(rgba(43,58,103,.65), rgba(43,58,103,.65)),
+        url("../images/hero-banner.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    color:white;
+}
+body{
+
+    background-image:url("../images/background.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+}
+.products-section{
+
+    background-image:url("../images/products-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    padding:80px 0;
+
+}
+.categories{
+
+    background-image:
+    linear-gradient(rgba(255,255,255,.9),
+    rgba(255,255,255,.9)),
+    url("../images/category-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+} 
+.promo-banner{
+
+    background-image:
+    linear-gradient(rgba(0,0,0,.45),
+    rgba(0,0,0,.45)),
+    url("../images/sale-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}
+.newsletter{
+
+    background-image:
+    linear-gradient(rgba(43,58,103,.8),
+    rgba(43,58,103,.8)),
+    url("../images/newsletter.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}.shophub-footer{
+
+    background-image:
+    linear-gradient(rgba(20,20,20,.9),
+    rgba(20,20,20,.9)),
+    url("../images/footer-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}.auth-page{
+
+    background-image:
+    linear-gradient(rgba(0,0,0,.55),
+    rgba(0,0,0,.55)),
+    url("../images/login-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    min-height:100vh;
+
+}
+.hero-banner{
+    width:100%;
+    min-height:600px;
+
+    background-image:
+
+        url("../images/hero-banner.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+}
+html,
+/* Whole Website Background */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("../images/Screenshot_8-7-2026_94112_chatgpt.com.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+
+.shophub-footer{
+    background-image:
+    linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
+    url("../images/footer.jpg");
+
+    background-size:cover;
+}
+

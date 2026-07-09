@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products:product_list' %}">Shop</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products:product_list_by_category' product.category.slug %}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        <!-- Product image -->
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
+            {% else %}
+                <div class="product-detail-img d-flex align-items-center justify-content-center bg-light rounded">
+                    <i class="bi bi-image fs-1 text-secondary"></i>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Product info -->
+        <div class="col-md-6">
+            <span class="badge bg-secondary-subtle text-secondary-emphasis mb-2">{{ product.category.name }}</span>
+            <h1 class="fw-bold">{{ product.name }}</h1>
+            <h3 class="text-primary fw-bold mb-3">${{ product.price }}</h3>
+
+            {% if product.in_stock %}
+                <p class="text-success"><i class="bi bi-check-circle-fill"></i> In stock ({{ product.stock }} available)</p>
+            {% else %}
+                <p class="text-danger"><i class="bi bi-x-circle-fill"></i> Out of stock</p>
+            {% endif %}
+
+            <p class="text-muted">{{ product.description|linebreaks }}</p>
+
+            <div class="d-flex gap-2 mt-4">
+                {% if product.in_stock %}
+                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-flex gap-2">
+                    {% csrf_token %}
+                    <select name="quantity" class="form-select" style="width: 90px;">
+                        {% for i in "12345"|make_list %}
+                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-cart-plus"></i> Add to Cart
+                    </button>
+                </form>
+                {% else %}
+                    <button class="btn btn-secondary btn-lg" disabled>Out of stock</button>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <form action="{% url 'wishlist:wishlist_add' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-lg" title="Add to wishlist">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Related products -->
+    {% if related_products %}
+    <div class="mt-5">
+        <h3 class="section-title mb-4">You Might Also Like</h3>
+        <div class="row g-4">
+            {% for product in related_products %}
+                {% include "products/_product_card.html" with product=product %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

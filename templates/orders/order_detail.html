@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Order #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="section-title mb-4">Order #{{ order.id }}</h2>
+
+    <div class="row g-4">
+        <div class="col-md-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Items</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for item in order.items.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>{{ item.product.name }} &times; {{ item.quantity }}</span>
+                            <span class="fw-semibold">${{ item.get_cost }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="d-flex justify-content-between fs-5 fw-bold border-top pt-3 mt-2">
+                        <span>Total</span>
+                        <span class="text-primary">${{ order.get_total_cost }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Shipping & Status</h5>
+                    <p class="mb-1"><strong>Status:</strong>
+                        <span class="badge bg-{% if order.status == 'delivered' %}success{% elif order.status == 'cancelled' %}danger{% else %}warning text-dark{% endif %}">
+                            {{ order.get_status_display }}
+                        </span>
+                    </p>
+                    <p class="mb-1"><strong>Payment:</strong> {{ order.get_payment_method_display }}</p>
+                    <hr>
+                    <p class="mb-1"><strong>{{ order.full_name }}</strong></p>
+                    <p class="mb-1">{{ order.address }}</p>
+                    <p class="mb-1">{{ order.city }}, {{ order.postal_code }}</p>
+                    <p class="mb-1">{{ order.phone }}</p>
+                    <p class="mb-0">{{ order.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

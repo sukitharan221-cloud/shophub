@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ShopHub — Django eCommerce Demo
 
 A simple, beginner-friendly eCommerce website built with Django, SQLite,
@@ -72,3 +73,6 @@ shophub/
 - Checkout is a **Cash on Delivery demo only** — no real payment gateway
   is integrated.
 - Run `python manage.py createsuperuser` any time you want another admin account.
+=======
+# shophub
+>>>>>>> 0ee8e68c256354465a0041cf1c3e350bde1c2534

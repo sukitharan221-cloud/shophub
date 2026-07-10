@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- ======================= HERO BANNER ======================= -->
+<section class="hero-banner text-white text-center d-flex align-items-center">
+    <div class="container-fluid px-5">
+        <h1 class="display-3 fw-bold">Welcome to ShopHub</h1>
+        <p class="lead">Discover amazing products at unbeatable prices.</p>
+
+        <a href="{% url 'products:product_list' %}"
+           class="btn btn-warning btn-lg fw-semibold mt-3">
+            Shop Now <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+<div class="container-fluid px-5 my-5">
+
+    <!-- ======================= CATEGORIES ======================= -->
+    <h2 class="section-title mb-4">Shop by Category</h2>
+
+    <div class="row g-4 mb-5">
+
+        {% for category in categories %}
+
+        <div class="col-6 col-md-4 col-lg-3">
+
+            <a href="{% url 'products:product_list_by_category' category.slug %}"
+               class="text-decoration-none">
+
+                <div class="card category-card h-100 border-0 shadow-sm">
+
+                    {% if category.image %}
+                    <img src="{{ category.image.url }}"
+                         class="card-img-top category-img"
+                         alt="{{ category.name }}">
+                    {% else %}
+                    <div class="category-img bg-light d-flex justify-content-center align-items-center">
+                        <i class="bi bi-box-seam fs-1 text-secondary"></i>
+                    </div>
+                    {% endif %}
+
+                    <div class="card-body text-center">
+                        <h6>{{ category.name }}</h6>
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No Categories Available.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- ======================= SHOP HUB HIGHLIGHTS ======================= -->
+
+    <section class="row g-4 mb-5">
+
+        <div class="col-lg-7">
+
+            <div class="content-panel reveal p-5 h-100">
+
+                <h2 class="section-title">
+                    A Modern Shopping Experience
+                </h2>
+
+                <p class="text-muted mt-3">
+                    From trending essentials to everyday favorites,
+                    ShopHub brings quality products,
+                    secure checkout and fast delivery.
+                </p>
+
+                <div class="row mt-4 g-3">
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card p-4 text-center h-100">
+
+                            <i class="bi bi-truck fs-1 text-primary"></i>
+
+                            <h5 class="mt-3">
+                                Fast Delivery
+                            </h5>
+
+                            <p>
+                                Quick delivery across the country.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card p-4 text-center h-100">
+
+                            <i class="bi bi-shield-check fs-1 text-primary"></i>
+
+                            <h5 class="mt-3">
+                                Secure Payment
+                            </h5>
+
+                            <p>
+                                100% safe online payments.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card p-4 text-center h-100">
+
+                            <i class="bi bi-stars fs-1 text-primary"></i>
+
+                            <h5 class="mt-3">
+                                Best Products
+                            </h5>
+
+                            <p>
+                                Premium quality at affordable prices.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+            <div class="promo-banner reveal h-100 p-5 text-white">
+
+                <h2 class="fw-bold">
+                    Limited Time Offer
+                </h2>
+
+                <p class="mt-3">
+                    Save up to 50% on selected products.
+                </p>
+
+                <a href="{% url 'products:product_list' %}"
+                   class="btn btn-light">
+                    Explore Deals
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ======================= FEATURED PRODUCTS ======================= -->
+
+    <div class="d-flex justify-content-between mb-4">
+
+        <h2 class="section-title">
+            Featured Products
+        </h2>
+
+        <a href="{% url 'products:product_list' %}">
+            View All →
+        </a>
+
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        {% for product in featured_products %}
+
+            {% include "products/_product_card.html" with product=product %}
+
+        {% empty %}
+
+            <p>No Featured Products.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- ======================= LATEST PRODUCTS ======================= -->
+
+    <div class="d-flex justify-content-between mb-4">
+
+        <h2 class="section-title">
+            Latest Arrivals
+        </h2>
+
+        <a href="{% url 'products:product_list' %}">
+            View All →
+        </a>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for product in latest_products %}
+
+            {% include "products/_product_card.html" with product=product %}
+
+        {% empty %}
+
+            <p>No Products Available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
